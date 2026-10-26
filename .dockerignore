@@ -1,0 +1,9 @@
+.git
+.env
+.env.*
+target
+docs
+scripts
+.idea
+.vscode
+README.md

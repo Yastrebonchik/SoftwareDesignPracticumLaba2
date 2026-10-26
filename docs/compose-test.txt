@@ -1,0 +1,180 @@
+time="2026-10-26T17:17:28+03:00" level=warning msg="/home/alex/projects/devops-lab2/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Image notes-api:1.0.0 Building
+#1 [internal] load local bake definitions
+#1 reading from stdin 510B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 870B 0.0s done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/maven:3.9.11-eclipse-temurin-21-alpine@sha256:922927df2c662cdd47ddb116443d6bec4696cfae3de1a0ddac8fcc7b87ce61ae
+#3 DONE 1.3s
+
+#4 [internal] load metadata for docker.io/library/eclipse-temurin:21-jre-alpine@sha256:b48e02e0ea88d7bfb305335df94923bdef394905f4147dccd52e873cf17b1088
+#4 DONE 1.3s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 101B done
+#5 DONE 0.1s
+
+#6 [builder 1/6] FROM docker.io/library/maven:3.9.11-eclipse-temurin-21-alpine@sha256:922927df2c662cdd47ddb116443d6bec4696cfae3de1a0ddac8fcc7b87ce61ae
+#6 DONE 0.0s
+
+#7 [runtime 1/4] FROM docker.io/library/eclipse-temurin:21-jre-alpine@sha256:b48e02e0ea88d7bfb305335df94923bdef394905f4147dccd52e873cf17b1088
+#7 DONE 0.0s
+
+#8 [internal] load build context
+#8 transferring context: 1.08kB 0.0s done
+#8 DONE 0.1s
+
+#9 [runtime 3/4] WORKDIR /app
+#9 CACHED
+
+#10 [builder 3/6] COPY pom.xml .
+#10 CACHED
+
+#11 [runtime 2/4] RUN addgroup -S -g 10001 app && adduser -S -D -H -u 10001 -G app app
+#11 CACHED
+
+#12 [builder 2/6] WORKDIR /build
+#12 CACHED
+
+#13 [builder 4/6] RUN mvn -B -ntp dependency:go-offline
+#13 CACHED
+
+#14 [builder 5/6] COPY src ./src
+#14 CACHED
+
+#15 [builder 6/6] RUN mvn -B -ntp package
+#15 CACHED
+
+#16 [runtime 4/4] COPY --from=builder --chown=app:app /build/target/app.jar ./app.jar
+#16 CACHED
+
+#17 exporting to image
+#17 exporting layers done
+#17 writing image sha256:4113640054101b709dc61cc0036e7258b489c5249d7b457ab35fe66eb832b791
+#17 writing image sha256:4113640054101b709dc61cc0036e7258b489c5249d7b457ab35fe66eb832b791 0.0s done
+#17 naming to docker.io/library/notes-api:1.0.0 0.0s done
+#17 DONE 0.1s
+
+#18 resolving provenance for metadata file
+#18 DONE 0.1s
+ Image notes-api:1.0.0 Built
+ Container devops-lab2-db-1 Running
+ Container devops-lab2-app-1 Recreate
+ Container devops-lab2-app-1 Recreated
+ Container devops-lab2-db-1 Waiting
+ Container devops-lab2-db-1 Healthy
+ Container devops-lab2-app-1 Starting
+ Container devops-lab2-app-1 Started
+ Container devops-lab2-app-1 Waiting
+ Container devops-lab2-app-1 Healthy
+ Container devops-lab2-nginx-1 Starting
+ Container devops-lab2-nginx-1 Started
+ Container devops-lab2-app-1 Waiting
+ Container devops-lab2-db-1 Waiting
+ Container devops-lab2-nginx-1 Waiting
+ Container devops-lab2-db-1 Healthy
+ Container devops-lab2-app-1 Healthy
+ Container devops-lab2-nginx-1 Healthy
+PASS: health, create, read, list, input validation
+time="2026-10-26T17:17:46+03:00" level=warning msg="/home/alex/projects/devops-lab2/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Container devops-lab2-app-1 Restarting
+ Container devops-lab2-db-1 Restarting
+ Container devops-lab2-nginx-1 Restarting
+ Container devops-lab2-db-1 Started
+ Container devops-lab2-nginx-1 Started
+ Container devops-lab2-app-1 Started
+time="2026-10-26T17:17:49+03:00" level=warning msg="/home/alex/projects/devops-lab2/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Container devops-lab2-app-1 Running
+ Container devops-lab2-db-1 Running
+ Container devops-lab2-nginx-1 Running
+ Container devops-lab2-db-1 Waiting
+ Container devops-lab2-db-1 Healthy
+ Container devops-lab2-app-1 Waiting
+ Container devops-lab2-app-1 Healthy
+ Container devops-lab2-db-1 Waiting
+ Container devops-lab2-nginx-1 Waiting
+ Container devops-lab2-app-1 Waiting
+ Container devops-lab2-db-1 Healthy
+ Container devops-lab2-nginx-1 Healthy
+ Container devops-lab2-app-1 Healthy
+PASS: PostgreSQL data survives restart
+time="2026-10-26T17:18:00+03:00" level=warning msg="/home/alex/projects/devops-lab2/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Container devops-lab2-nginx-1 Stopping
+ Container devops-lab2-nginx-1 Stopped
+ Container devops-lab2-nginx-1 Removing
+ Container devops-lab2-nginx-1 Removed
+ Container devops-lab2-app-1 Stopping
+ Container devops-lab2-app-1 Stopped
+ Container devops-lab2-app-1 Removing
+ Container devops-lab2-app-1 Removed
+ Container devops-lab2-db-1 Stopping
+ Container devops-lab2-db-1 Stopped
+ Container devops-lab2-db-1 Removing
+ Container devops-lab2-db-1 Removed
+ Network devops-lab2_backend Removing
+ Network devops-lab2_frontend Removing
+ Network devops-lab2_backend Removed
+ Network devops-lab2_frontend Removed
+time="2026-10-26T17:18:03+03:00" level=warning msg="/home/alex/projects/devops-lab2/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Network devops-lab2_backend Creating
+ Network devops-lab2_backend Creating
+ Network devops-lab2_frontend Creating
+ Network devops-lab2_frontend Creating
+ Network devops-lab2_backend Created
+ Network devops-lab2_backend Created
+ Container devops-lab2-db-1 Creating
+ Container devops-lab2-db-1 Created
+ Network devops-lab2_frontend Created
+ Network devops-lab2_frontend Created
+ Container devops-lab2-app-1 Creating
+ Container devops-lab2-app-1 Created
+ Container devops-lab2-nginx-1 Creating
+ Container devops-lab2-nginx-1 Created
+ Container devops-lab2-db-1 Starting
+ Container devops-lab2-db-1 Started
+ Container devops-lab2-db-1 Waiting
+ Container devops-lab2-db-1 Healthy
+ Container devops-lab2-app-1 Starting
+ Container devops-lab2-app-1 Started
+ Container devops-lab2-app-1 Waiting
+ Container devops-lab2-app-1 Healthy
+ Container devops-lab2-nginx-1 Starting
+ Container devops-lab2-nginx-1 Started
+ Container devops-lab2-app-1 Waiting
+ Container devops-lab2-db-1 Waiting
+ Container devops-lab2-nginx-1 Waiting
+ Container devops-lab2-db-1 Healthy
+ Container devops-lab2-app-1 Healthy
+ Container devops-lab2-nginx-1 Healthy
+PASS: PostgreSQL data survives container recreation
+time="2026-10-26T17:18:29+03:00" level=warning msg="/home/alex/projects/devops-lab2/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+PASS: all containers healthy, networks, non-root app, only nginx publishes port 80
+time="2026-10-26T17:18:29+03:00" level=warning msg="/home/alex/projects/devops-lab2/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Container devops-lab2-db-1 Stopping
+ Container devops-lab2-db-1 Stopped
+PASS: health detects database outage
+time="2026-10-26T17:18:33+03:00" level=warning msg="/home/alex/projects/devops-lab2/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Container devops-lab2-app-1 Running
+ Container devops-lab2-nginx-1 Running
+ Container devops-lab2-db-1 Starting
+ Container devops-lab2-db-1 Started
+ Container devops-lab2-db-1 Waiting
+ Container devops-lab2-db-1 Healthy
+ Container devops-lab2-app-1 Waiting
+ Container devops-lab2-app-1 Healthy
+ Container devops-lab2-db-1 Waiting
+ Container devops-lab2-nginx-1 Waiting
+ Container devops-lab2-app-1 Waiting
+ Container devops-lab2-db-1 Healthy
+ Container devops-lab2-nginx-1 Healthy
+ Container devops-lab2-app-1 Healthy
+PASS: recovery, delete, missing note returns 404
+time="2026-10-26T17:18:41+03:00" level=warning msg="/home/alex/projects/devops-lab2/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+NAME                  IMAGE                                                                                        COMMAND                  SERVICE   CREATED          STATUS                    PORTS
+devops-lab2-app-1     notes-api:1.0.0                                                                              "java -jar /app/app.…"   app       37 seconds ago   Up 29 seconds (healthy)   8080/tcp
+devops-lab2-db-1      postgres:17-alpine@sha256:266d3c257594e195b309ae9d1805e54c788f1d7b375f56bf6c367aac6c917e7b   "docker-entrypoint.s…"   db        37 seconds ago   Up 7 seconds (healthy)    5432/tcp
+devops-lab2-nginx-1   nginx:1.28-alpine@sha256:a8b39bd9cf0f83869a2162827a0caf6137ddf759d50a171451b335cecc87d236    "/docker-entrypoint.…"   nginx     36 seconds ago   Up 18 seconds (healthy)   0.0.0.0:80->80/tcp, [::]:80->80/tcp
