@@ -1,0 +1,18 @@
+2026-10-26T17:09:36+03:00
+Image size: 235101661 bytes; runtime user: app:app
+715a35e91d740b24d04730176075ab9f05da97af28b2b9aabc03acb968165953
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    15    0    15    0     0   2807      0 --:--:-- --:--:-- --:--:--  3000
+HTTP/1.1 200
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Mon, 26 Oct 2026 14:09:45 GMT
+
+{"status":"UP"}uid=10001(app) gid=10001(app) groups=10001(app)
+Docker health: healthy
+devops-lab2-standalone
+devops-lab2-standalone
+PASS: standalone image, /health HTTP 200, non-root uid=10001, Docker HEALTHCHECK

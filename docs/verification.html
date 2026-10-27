@@ -1,0 +1,16 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Lab 2 — Docker verification</title><style>body{margin:40px;background:#121b29;color:#e6edf7;font:17px/1.5 system-ui}h1{font-size:30px;margin-bottom:4px}small{color:#a5b6cd}h2{font-size:17px;color:#94bfff;margin:20px 0 8px}pre{font:15px/1.5 monospace;background:#1e2b40;padding:16px;border-radius:8px;white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>DevOps Lab 2 — verified on Ubuntu 24.04</h1><small>Actual command output · 2026-10-26T17:22:15+03:00</small><h2>docker compose ps</h2><pre>SERVICE   STATUS                   PORTS
+app       Up 4 minutes (healthy)   8080/tcp
+db        Up 3 minutes (healthy)   5432/tcp
+nginx     Up 3 minutes (healthy)   0.0.0.0:80-&gt;80/tcp, [::]:80-&gt;80/tcp</pre><h2>curl -i http://localhost/health</h2><pre>HTTP 200
+{&quot;status&quot;:&quot;UP&quot;}</pre><h2>POST /notes through Nginx</h2><pre>HTTP 201
+{&quot;id&quot;:2,&quot;text&quot;:&quot;Заметка хранится в PostgreSQL. Лабораторная №2 работает.&quot;}</pre><h2>GET /notes</h2><pre>[
+  {
+    &quot;id&quot;: 2,
+    &quot;text&quot;: &quot;Заметка хранится в PostgreSQL. Лабораторная №2 работает.&quot;
+  }
+]</pre><h2>Integration checks</h2><pre>PASS: health, create, read, list, input validation
+PASS: PostgreSQL data survives restart
+PASS: PostgreSQL data survives container recreation
+PASS: all containers healthy, networks, non-root app, only nginx publishes port 80
+PASS: health detects database outage
+PASS: recovery, delete, missing note returns 404</pre></html>

@@ -1,0 +1,81 @@
+2026-10-26T17:22:01+03:00
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 870B 0.0s done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/library/eclipse-temurin:21-jre-alpine@sha256:b48e02e0ea88d7bfb305335df94923bdef394905f4147dccd52e873cf17b1088
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/maven:3.9.11-eclipse-temurin-21-alpine@sha256:922927df2c662cdd47ddb116443d6bec4696cfae3de1a0ddac8fcc7b87ce61ae
+#3 DONE 0.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 101B done
+#4 DONE 0.0s
+
+#5 [builder 1/6] FROM docker.io/library/maven:3.9.11-eclipse-temurin-21-alpine@sha256:922927df2c662cdd47ddb116443d6bec4696cfae3de1a0ddac8fcc7b87ce61ae
+#5 DONE 0.0s
+
+#6 [runtime 1/4] FROM docker.io/library/eclipse-temurin:21-jre-alpine@sha256:b48e02e0ea88d7bfb305335df94923bdef394905f4147dccd52e873cf17b1088
+#6 DONE 0.0s
+
+#7 [internal] load build context
+#7 transferring context: 1.08kB done
+#7 DONE 0.0s
+
+#8 [runtime 2/4] RUN addgroup -S -g 10001 app && adduser -S -D -H -u 10001 -G app app
+#8 CACHED
+
+#9 [builder 2/6] WORKDIR /build
+#9 CACHED
+
+#10 [builder 3/6] COPY pom.xml .
+#10 CACHED
+
+#11 [builder 4/6] RUN mvn -B -ntp dependency:go-offline
+#11 CACHED
+
+#12 [runtime 3/4] WORKDIR /app
+#12 CACHED
+
+#13 [builder 5/6] COPY src ./src
+#13 CACHED
+
+#14 [builder 6/6] RUN mvn -B -ntp package
+#14 CACHED
+
+#15 [runtime 4/4] COPY --from=builder --chown=app:app /build/target/app.jar ./app.jar
+#15 CACHED
+
+#16 exporting to image
+#16 exporting layers done
+#16 writing image sha256:fcbde11ec6381d037d4adedb8eff6b2d7c216ef001e8daedb93a6f26cbca3355 0.0s done
+#16 naming to localhost:5000/notes-api:1.0.0 0.0s done
+#16 DONE 0.0s
+The push refers to repository [localhost:5000/notes-api]
+3d262cc9c068: Preparing
+43a4fc76ae1f: Preparing
+6d9fd2474a36: Preparing
+7ca81c7d98e6: Preparing
+51791efe7ec1: Preparing
+33b18757a0db: Preparing
+b65808c42991: Preparing
+75c137aedfb2: Preparing
+b65808c42991: Waiting
+75c137aedfb2: Waiting
+33b18757a0db: Waiting
+43a4fc76ae1f: Pushed
+51791efe7ec1: Pushed
+7ca81c7d98e6: Pushed
+6d9fd2474a36: Pushed
+75c137aedfb2: Pushed
+3d262cc9c068: Pushed
+b65808c42991: Pushed
+33b18757a0db: Pushed
+1.0.0: digest: sha256:3e507b1d0ac70866185cf700a80f78f1684efc8c9f164316d82ae838fdd360f6 size: 1992
+Published: localhost:5000/notes-api:1.0.0
+{"name":"notes-api","tags":["1.0.0"]}
+
+PASS: script builds and pushes image to temporary localhost registry

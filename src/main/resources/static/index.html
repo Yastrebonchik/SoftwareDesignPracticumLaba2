@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Заметки · DevOps Lab 2</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f3f5f8; color: #202d42; font: 17px/1.5 system-ui, sans-serif; }
+    main { max-width: 760px; margin: 64px auto; padding: 32px; background: white; border-radius: 16px; }
+    small { color: #617087; } h1 { margin: 8px 0; } p { margin-top: 8px; }
+    form { display: flex; gap: 12px; margin: 28px 0; }
+    input { min-width: 0; flex: 1; padding: 12px; border: 1px solid #b8c3d2; border-radius: 8px; font: inherit; }
+    button { border: 0; border-radius: 8px; padding: 12px 18px; background: #245cca; color: white; cursor: pointer; font: inherit; }
+    ul { list-style: none; padding: 0; } li { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-top: 1px solid #e2e7ee; }
+    li span { flex: 1; white-space: pre-wrap; overflow-wrap: anywhere; }
+    li button { background: #edf1f7; color: #33445e; padding: 8px 12px; }
+    a { color: #245cca; } #message { color: #ad2935; }
+    @media (max-width: 600px) { main { margin: 16px; padding: 24px; } form { flex-direction: column; } }
+  </style>
+</head>
+<body>
+<main>
+  <small>DEVOPS · ЛАБОРАТОРНАЯ 2</small>
+  <h1>Заметки</h1>
+  <p>Spring Boot + PostgreSQL через Nginx</p>
+  <p id="health">Проверка соединения…</p>
+  <form id="form">
+    <input id="text" aria-label="Текст заметки" placeholder="Новая заметка" required maxlength="1000">
+    <button type="submit">Добавить</button>
+  </form>
+  <p id="message" role="status"></p>
+  <ul id="notes"></ul>
+  <small>API: <a href="/health">/health</a> · <a href="/notes">/notes</a></small>
+</main>
+<script>
+  const message = document.getElementById('message');
+  async function request(path, options) {
+    const response = await fetch(path, options);
+    if (!response.ok) throw new Error(`Ошибка запроса: HTTP ${response.status}`);
+    return response.status === 204 ? null : response.json();
+  }
+  async function refresh() {
+    const health = await request('/health');
+    document.getElementById('health').textContent = `Приложение и база данных: ${health.status}`;
+    const notes = await request('/notes');
+    const list = document.getElementById('notes');
+    list.replaceChildren();
+    for (const note of notes) {
+      const row = document.createElement('li');
+      const text = document.createElement('span');
+      text.textContent = note.text;
+      const button = document.createElement('button');
+      button.textContent = 'Удалить';
+      button.onclick = async () => {
+        try { await request(`/notes/${note.id}`, {method: 'DELETE'}); await refresh(); }
+        catch (error) { message.textContent = error.message; }
+      };
+      row.append(text, button);
+      list.append(row);
+    }
+    if (notes.length === 0) list.textContent = 'Пока нет заметок.';
+  }
+  document.getElementById('form').onsubmit = async event => {
+    event.preventDefault();
+    message.textContent = '';
+    try {
+      await request('/notes', {method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({text: document.getElementById('text').value})});
+      document.getElementById('text').value = '';
+      await refresh();
+    } catch (error) { message.textContent = error.message; }
+  };
+  refresh().catch(error => { message.textContent = error.message; });
+</script>
+</body>
+</html>
